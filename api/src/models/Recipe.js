@@ -5,10 +5,10 @@ module.exports = (sequelize) => {
   // defino el modelo
   sequelize.define('recipe', {    //recetas =  https://api.spoonacular.com/recipes/complexSearch?apiKey=7727156576d94a4bae202ab459d94bf5&addRecipeInformation=true
       id:{
-        type:DataTypes.INTEGER,
-        primaryKey:true,
-        allowNull:false,
-        unique:true,
+        type: DataTypes.UUID, //Es una convinación de letras números y guiones (código alfanumérico)
+        defaultValue: DataTypes.UUIDV4,   //UUIDV4 es el algoritmo para crear el di aleatorio, consta de 32 dígitos hexadecimales separados por guiones, como por ejemplo: f47ac10b-58cc-4372-a567-0e02b2c3d479
+        primaryKey: true,
+        allowNull: false,
       },
       title:{
         type:DataTypes.STRING,
@@ -18,7 +18,7 @@ module.exports = (sequelize) => {
         type:DataTypes.STRING,
         allowNull: false,
       },
-      sumary:{
+      summary:{
         type:DataTypes.STRING,
         allowNull: false,
       },
@@ -27,7 +27,7 @@ module.exports = (sequelize) => {
         allowNull: false,
       },
       steps:{
-        type:DataTypes.JSONB,
+        type:DataTypes.STRING,
         allowNull: false,
       },
     },
