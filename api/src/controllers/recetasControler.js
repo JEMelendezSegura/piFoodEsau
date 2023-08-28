@@ -35,8 +35,10 @@ const getRecipeById = async (id) => {
 };
 
 const getRecipeByName = async (name) =>{
-  const respuesta = await name;
-  return respuesta;
+  const infoFromApi = (await axios.get(`https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_KEY}&number=100`)).data.results;
+  const recipesApi = infoFromApi.filter(recipe => recipe.title.toLowerCase().includes(name.toLowerCase()));
+  const recipesDB = await Recipe.findAll({where: {name:name}});
+  return [...recipesApi, ...recipesDB];
 }
 
 module.exports = {
