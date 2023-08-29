@@ -1,4 +1,4 @@
-const {getRecipeById, getRecipeByName} = require("../controllers/recetasControler");
+const {getRecipeById, getRecipeByName, postRecipe} = require("../controllers/recetasControler");
 
 
 const getDetailHandler = async(req, res) => {
@@ -21,9 +21,19 @@ const getAllRecipesHandler = async(req, res) => {
     }
 }
 
+const postRecipesHandler = async(req, res) => {
+    const {title, image, summary, healthScore, diets, steps } = req.body;
+    try {
+        const response = await postRecipe(title, image, summary, healthScore, diets, steps);
+        res.status(200).json(response);
+    } catch (error) {
+        res.status(400).json({error: error.message}) 
+    }
+}
 
 
 module.exports = {
     getDetailHandler,
     getAllRecipesHandler,
+    postRecipesHandler,
 }
