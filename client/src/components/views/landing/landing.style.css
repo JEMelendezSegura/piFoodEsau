@@ -1,0 +1,16 @@
+.homepage {
+    background-image: url("./landing.jpg");
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .transparent-box {
+    background-color: rgba(255, 255, 255, 0.7); /* Color de fondo transparente */
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+  }
