@@ -1,7 +1,13 @@
+import Cards from "../../cards/cards";
+import SearchBar from "../../searchBar/searchBar";
+import "../home/home.style.css";
+
+
 function Home (){
     return (
-        <div>
-            <h1>este es el home</h1>
+        <div className="home">
+            <SearchBar/>
+            <Cards/>
         </div>
       );
 }
