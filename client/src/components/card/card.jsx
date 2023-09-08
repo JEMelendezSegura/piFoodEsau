@@ -7,7 +7,6 @@ return (
         <h2>Nombre</h2>
         <p>Imagen</p>
         <p>Dietas</p>
-        <p>dato aleatorio</p>
     </div>
 )
 
