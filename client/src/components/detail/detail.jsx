@@ -1,17 +1,34 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 import { getRecipeById } from "../redux/actions";
 import { useSelector } from "react-redux";
 
+
 function Detail() {
   const { id } = useParams();
   const dispatch = useDispatch();
   const recipeDetail = useSelector((state) => state.recipeDetail);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    dispatch(getRecipeById(id));
+    dispatch(getRecipeById(id))
+    .then(()=>{
+      setIsLoading(false);
+    })
+    .catch((error)=>{
+      console.error("Error al cargar los datos:", error);
+      setIsLoading(false);
+    })
   }, [dispatch, id]);
+
+  if (isLoading) {
+    return <div>Cargando datos...</div>;
+  }
+
+  if (!recipeDetail) {
+    return <div>No se pudo cargar la receta.</div>;
+  }
 
   return (
     <div>
