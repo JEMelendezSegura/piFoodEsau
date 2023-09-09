@@ -11,13 +11,13 @@ function Landing() {
     navigate("/home");
   }
 
-
   return (
     <div className="homepage">
       <div className="transparent-box">
-        <h1>Bienvenido a mi sitio web</h1>
+        <h1>DIETAS Y RECETAS</h1>
+        <p>by</p>
         <h2>
-          PIF FOOD JOSÉ ESAÚ MELÉNDEZ SEGURA
+          JOSÉ ESAÚ MELÉNDEZ SEGURA
         </h2>
         <button onClick={handleClick}>Home</button>
       </div>
