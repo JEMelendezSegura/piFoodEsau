@@ -6,7 +6,7 @@ function NavLink({to, children, ...props}) {
   return <NavLinkComp
     {...props}
     to={to}
-    className={({ isActive })=> ( isActive ? "isActive" : "inActive" ) }
+    className={({ isActive })=> ( isActive ? 'isActive' : undefined ) }
   >{children}</NavLinkComp>;
 }
 

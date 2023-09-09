@@ -10,9 +10,12 @@ class NavBar extends React.Component{
     }
 
     render(){
-        return <nav className="nav">
+        return <nav className="container">
             <NavLink to={"/home"}>
-                <span>Home</span>
+                <button>Home</button>
+            </NavLink>
+            <NavLink to={"/"}>
+                <button >Landing</button>
             </NavLink>
         </nav>
     }
