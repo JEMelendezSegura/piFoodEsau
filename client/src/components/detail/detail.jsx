@@ -9,15 +9,30 @@ function Detail() {
   const dispatch = useDispatch();
   const recipeDetail = useSelector((state) => state.recipeDetail);
 
-  useEffect(()=>{
+  useEffect(() => {
     dispatch(getRecipeById(id));
-  }, [dispatch, id])
-
+  }, [dispatch, id]);
 
   return (
     <div>
-      <h1>detalle menso{id}</h1>
-      <p>{recipeDetail.title}</p>
+      <h1>Información adicional</h1>
+      <h2>ID: {recipeDetail.id}</h2>
+      <h2>NOMBRE: {recipeDetail.title}</h2>
+      <h2>RESUMEN DE LA RECETA: {recipeDetail.summary}</h2>
+      <h2>NIVEL DE COMIDA SALUDABLE: {recipeDetail.healthScore}</h2>
+      <h2>PASOS DE PREPARACIÓN: </h2>
+      <ol>
+        {recipeDetail.steps.map((step) => (
+          <li>{step.step}</li>
+        ))}
+      </ol>
+      <h2>TIPOS DE DIETA: </h2>
+      <ul>
+        {recipeDetail.diets.map((diet, index) => (
+          <li key={index}>{diet}</li>
+        ))}
+      </ul>
+      <img src={recipeDetail.image} alt="Foto de la receta"></img>
     </div>
   );
 }
