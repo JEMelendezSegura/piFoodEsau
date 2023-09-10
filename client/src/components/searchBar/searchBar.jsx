@@ -1,7 +1,7 @@
 import "../searchBar/searchBar.style.css";
 
 
-function SearchBar ({handleChange, handleSubmit, refreshPage }){
+function SearchBar ({handleChange, handleSubmit, refreshPage, handleOrder }){
     return (
         <div className="searchBar">
             <form onChange={handleChange}>
@@ -9,10 +9,15 @@ function SearchBar ({handleChange, handleSubmit, refreshPage }){
                 <p>Busqueda de recetas por nombre:</p>
                 <input placeholder="nombre de receta" type="search"/>
                 <button type="submit" onClick={handleSubmit}>Buscar</button>
+                <button onClick={refreshPage}>Borrar búsqueda</button>
             </form>
-            <button onClick={refreshPage}>
-            Borrar búsqueda
-        </button>
+            <div>
+                <select onChange={handleOrder}>
+                <option value="A">Ascendente</option>
+                <option value="D">Descendente</option>
+                </select>
+            </div>
+
         </div>       
         )
 }

@@ -2,6 +2,7 @@ import axios from "axios";
 
 export const GET_RECIPES_BY_NAME = "GET_RECIPES_BY_NAME";
 export const GET_RECIPE_BY_ID = "GET_RECIPE_BY_ID";
+export const RECIPE_ORDER = "RECIPE_ORDER";
 
 
 export function getRecipesByName(name){
@@ -11,6 +12,13 @@ export function getRecipesByName(name){
             type: GET_RECIPES_BY_NAME,
             payload: response.data
         })
+    }
+}
+
+export function orderRecipes(orden){
+    return {
+        type: RECIPE_ORDER,
+        payload: orden,
     }
 }
 
