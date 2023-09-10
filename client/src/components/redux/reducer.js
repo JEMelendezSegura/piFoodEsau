@@ -1,4 +1,4 @@
-import { GET_RECIPES_BY_NAME, GET_RECIPE_BY_ID, RECIPE_ORDER} from "./actions";
+import { GET_RECIPES_BY_NAME, GET_RECIPE_BY_ID, RECIPE_ORDER, RECIPE_ORDER_BY_SCORE} from "./actions";
 
 const initialState = {
     recipes: [],
@@ -27,6 +27,17 @@ function rootReducer(state = initialState, action){
             return {
                 ...state,
                 recipes: sortedRecipes,
+            }
+        case RECIPE_ORDER_BY_SCORE:
+            const sortedRecipesByScore = [...state.recipes];
+            if (action.payload === "A") {
+                sortedRecipesByScore.sort((a, b) => b.healthScore - a.healthScore);
+            } else {
+                sortedRecipesByScore.sort((a, b) => a.healthScore - b.healthScore);
+            }
+            return {
+                ...state,
+                recipes: sortedRecipesByScore,
             }
         default:
             return state;

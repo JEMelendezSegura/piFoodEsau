@@ -3,7 +3,7 @@ import Cards from "../../cards/cards";
 import SearchBar from "../../searchBar/searchBar";
 import "../home/home.style.css";
 import { useDispatch } from "react-redux";
-import { getRecipesByName, orderRecipes } from "../../redux/actions";
+import { getRecipesByName, orderRecipes, orderRecipesbyScore } from "../../redux/actions";
 import { useSelector } from "react-redux";
 
 
@@ -33,9 +33,13 @@ function Home (){
         dispatch(orderRecipes(e.target.value));
     }
 
+    function handleOrderByScore(e){
+        dispatch(orderRecipesbyScore(e.target.value));
+    }
+
     return (
         <div className="home">
-            <SearchBar handleChange={handleChange} handleSubmit={handleSubmit} refreshPage={refreshPage} handleOrder={handleOrder}/>
+            <SearchBar handleChange={handleChange} handleSubmit={handleSubmit} refreshPage={refreshPage} handleOrder={handleOrder} handleOrderByScore={handleOrderByScore}/>
             <Cards recipes ={recipes}/>
         </div>
       );

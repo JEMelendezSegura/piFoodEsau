@@ -3,6 +3,7 @@ import axios from "axios";
 export const GET_RECIPES_BY_NAME = "GET_RECIPES_BY_NAME";
 export const GET_RECIPE_BY_ID = "GET_RECIPE_BY_ID";
 export const RECIPE_ORDER = "RECIPE_ORDER";
+export const RECIPE_ORDER_BY_SCORE = "RECIPE_ORDER_BY_SCORE";
 
 
 export function getRecipesByName(name){
@@ -19,6 +20,13 @@ export function orderRecipes(orden){
     return {
         type: RECIPE_ORDER,
         payload: orden,
+    }
+}
+
+export function orderRecipesbyScore(orden){
+    return {
+        type: RECIPE_ORDER_BY_SCORE,
+        payload: orden, 
     }
 }
 
