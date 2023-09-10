@@ -3,6 +3,8 @@ import { useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 import { getRecipeById } from "../redux/actions";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+
 
 
 function Detail() {
@@ -10,6 +12,11 @@ function Detail() {
   const dispatch = useDispatch();
   const recipeDetail = useSelector((state) => state.recipeDetail);
   const [isLoading, setIsLoading] = useState(true);
+  const navigate = useNavigate();
+
+  const handleClick = ()=>{
+    navigate("/home");
+  }
 
   useEffect(() => {
     dispatch(getRecipeById(id))
@@ -32,6 +39,7 @@ function Detail() {
 
   return (
     <div>
+      <button onClick={handleClick}>Regresar</button>
       <h1>Información adicional</h1>
       <h2>ID: {recipeDetail.id}</h2>
       <h2>NOMBRE: {recipeDetail.title}</h2>
