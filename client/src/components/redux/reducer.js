@@ -1,8 +1,9 @@
-import { GET_RECIPES_BY_NAME, GET_RECIPE_BY_ID, RECIPE_ORDER, RECIPE_ORDER_BY_SCORE, RECIPE_FILTER_FROM_API} from "./actions";
+import { GET_RECIPES_BY_NAME, GET_RECIPE_BY_ID, RECIPE_ORDER, RECIPE_ORDER_BY_SCORE, RECIPE_FILTER_FROM_API, RECIPE_FILTER_BY_DIET, GET_ALL_DIETS} from "./actions";
 
 const initialState = {
     recipes: [],
     recipeDetail: [],
+    diets: [],
 }
 
 function rootReducer(state = initialState, action){
@@ -11,6 +12,13 @@ function rootReducer(state = initialState, action){
             return {
                 ...state,
                 recipes: action.payload,
+            }
+        case GET_ALL_DIETS:
+            const sortedDiets = [...action.payload];
+            sortedDiets.sort((a, b) => a.name.localeCompare(b.name)); // Ordenar por la propiedad 'name'
+            return {
+                ...state,
+                diets: sortedDiets,
             }
         case GET_RECIPE_BY_ID:
             return {
