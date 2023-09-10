@@ -105,15 +105,17 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import axios from 'axios';
+import { useSelector } from 'react-redux';
 
 function RecipeForm() {
+    const diets = useSelector((state) => state.diets);
   const dispatch = useDispatch();
   const [formData, setFormData] = useState({
     title: '',
     image: '',
     summary: '',
     healthScore: '',
-    diets: [], // Cambiado a un array vacío
+    diets: [], 
     steps: [],
   });
 
@@ -121,8 +123,8 @@ function RecipeForm() {
     title: '',
     image: '',
     healthScore: '',
-    diets: '', // Nuevo campo de error para las dietas
-    steps: '', // Nuevo campo de error para los pasos
+    diets: '', 
+    steps: '', 
   });
 
   const validateImageURL = (url) => {
@@ -201,7 +203,7 @@ function RecipeForm() {
     }
   };
 
-  const handleDietChange = (e) => {
+  const handleDietChange = (e) => {         //!!!!!!!!!!! aqui está el problema
     const { options } = e.target;
     const selectedDiets = Array.from(options)
       .filter((option) => option.selected)
@@ -213,12 +215,7 @@ function RecipeForm() {
     });
 
     // Limpiar el error de las dietas si se selecciona al menos una
-    if (selectedDiets.length > 0) {
-      setErrors({
-        ...errors,
-        diets: '',
-      });
-    }
+ 
   };
 
   const handleStepChange = (e, index) => {
@@ -309,10 +306,9 @@ function RecipeForm() {
       <div>
         <label htmlFor="diets">Dietas:</label>
         <select id="diets" name="diets" multiple onChange={handleDietChange} required>
-          <option value="gluten free">Sin gluten</option>
-          <option value="dairy free">Sin lácteos</option>
-          <option value="lacto ovo vegetarian">Vegetariano lacto-ovo</option>
-          <option value="vegan">Vegano</option>
+        {diets.map((diet)=>
+                <option value = {diet.name}>{diet.name}</option>
+                )}
         </select>
         {errors.diets && <p className="error">{errors.diets}</p>}
       </div>
