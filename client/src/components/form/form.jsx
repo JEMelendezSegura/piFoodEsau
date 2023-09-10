@@ -101,21 +101,20 @@
 
 
 
-
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import axios from 'axios';
 import { useSelector } from 'react-redux';
 
 function RecipeForm() {
-    const diets = useSelector((state) => state.diets);
+  const diets = useSelector((state) => state.diets);
   const dispatch = useDispatch();
   const [formData, setFormData] = useState({
     title: '',
     image: '',
     summary: '',
     healthScore: '',
-    diets: [], 
+    diets: [], // Ahora es un array de las dietas seleccionadas
     steps: [],
   });
 
@@ -123,8 +122,8 @@ function RecipeForm() {
     title: '',
     image: '',
     healthScore: '',
-    diets: '', 
-    steps: '', 
+    diets: '',
+    steps: '',
   });
 
   const validateImageURL = (url) => {
@@ -203,19 +202,27 @@ function RecipeForm() {
     }
   };
 
-  const handleDietChange = (e) => {         //!!!!!!!!!!! aqui está el problema
-    const { options } = e.target;
-    const selectedDiets = Array.from(options)
-      .filter((option) => option.selected)
-      .map((option) => option.value);
+  // Modifica la función handleDietChange para manejar los cambios en las casillas de verificación
+  const handleDietChange = (e) => {
+    const { name, checked } = e.target;
+
+    // Crea una copia del array de dietas seleccionadas
+    const selectedDietsCopy = [...formData.diets];
+
+    // Si la casilla de verificación está marcada, agrega la dieta al array; de lo contrario, elimínala
+    if (checked) {
+      selectedDietsCopy.push(name);
+    } else {
+      const index = selectedDietsCopy.indexOf(name);
+      if (index !== -1) {
+        selectedDietsCopy.splice(index, 1);
+      }
+    }
 
     setFormData({
       ...formData,
-      diets: selectedDiets,
+      diets: selectedDietsCopy,
     });
-
-    // Limpiar el error de las dietas si se selecciona al menos una
- 
   };
 
   const handleStepChange = (e, index) => {
@@ -304,12 +311,19 @@ function RecipeForm() {
         {errors.healthScore && <p className="error">{errors.healthScore}</p>}
       </div>
       <div>
-        <label htmlFor="diets">Dietas:</label>
-        <select id="diets" name="diets" multiple onChange={handleDietChange} required>
-        {diets.map((diet)=>
-                <option value = {diet.name}>{diet.name}</option>
-                )}
-        </select>
+        <label>Dietas:</label>
+        {diets.map((diet) => (
+          <div key={diet.name}>
+            <input
+              type="checkbox"
+              id={diet.name}
+              name={diet.name}
+              checked={formData.diets.includes(diet.name)}
+              onChange={handleDietChange}
+            />
+            <label htmlFor={diet.name}>{diet.name}</label>
+          </div>
+        ))}
         {errors.diets && <p className="error">{errors.diets}</p>}
       </div>
       <div>
