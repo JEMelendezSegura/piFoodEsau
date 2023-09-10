@@ -1,14 +1,23 @@
+import React, { useState } from 'react';
 import "../searchBar/searchBar.style.css";
 
 
 function SearchBar ({handleChange, handleSubmit, refreshPage, handleOrder, handleOrderByScore }){
+    const [inputValue, setInputValue] = useState('');
+    const handleInputReset = () => {
+        setInputValue('');
+      };
+
+    
+
+
     return (
         <div className="searchBar">
             <form onChange={handleChange}>
                 <h1>Buscar recetas</h1>
                 <p>Busqueda de recetas por nombre:</p>
-                <input placeholder="nombre de receta" type="search"/>
-                <button type="submit" onClick={handleSubmit}>Buscar</button>
+                <input placeholder="nombre de receta" type="search" value={inputValue} onChange={(e) => setInputValue(e.target.value)}/>
+                <button type="submit" onClick={(e) => { handleSubmit(e); handleInputReset(); }}  >Buscar</button>
                 <button onClick={refreshPage}>Borrar búsqueda</button>
             </form>
             <div>
