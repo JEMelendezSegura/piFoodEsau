@@ -7,6 +7,7 @@ export const RECIPE_ORDER_BY_SCORE = "RECIPE_ORDER_BY_SCORE";
 export const RECIPE_FILTER_FROM_API = "RECIPE_FILTER_FROM_API";
 export const RECIPE_FILTER_BY_DIET = "RECIPE_FILTER_BY_DIET";
 export const GET_ALL_DIETS = "GET_ALL_DIETS";
+export const CLEAR_RECIPE_DETAIL = "CLEAR_RECIPE_DETAIL";
 
 
 export function getRecipesByName(name){
@@ -57,7 +58,12 @@ export function filterRecipesByDiet(diet){
     }
 }
 
-
+export function clearDetail(){
+    return {
+        type: CLEAR_RECIPE_DETAIL,
+        payload: null,
+    }
+}
 
 
 export function getRecipeById(id){

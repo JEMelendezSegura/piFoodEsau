@@ -98,6 +98,10 @@
 // export default Form;
 //!!!!!!!!!!!!!
 
+
+
+
+
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import axios from 'axios';
@@ -109,7 +113,7 @@ function RecipeForm() {
     image: '',
     summary: '',
     healthScore: '',
-    diets: [],
+    diets: [], // Cambiado a un array vacío
     steps: [],
   });
 
@@ -117,6 +121,8 @@ function RecipeForm() {
     title: '',
     image: '',
     healthScore: '',
+    diets: '', // Nuevo campo de error para las dietas
+    steps: '', // Nuevo campo de error para los pasos
   });
 
   const validateImageURL = (url) => {
@@ -197,16 +203,22 @@ function RecipeForm() {
 
   const handleDietChange = (e) => {
     const { options } = e.target;
-    const diets = [];
-    for (const option of options) {
-      if (option.selected) {
-        diets.push(option.value);
-      }
-    }
+    const selectedDiets = Array.from(options)
+      .filter((option) => option.selected)
+      .map((option) => option.value);
+
     setFormData({
       ...formData,
-      diets,
+      diets: selectedDiets,
     });
+
+    // Limpiar el error de las dietas si se selecciona al menos una
+    if (selectedDiets.length > 0) {
+      setErrors({
+        ...errors,
+        diets: '',
+      });
+    }
   };
 
   const handleStepChange = (e, index) => {
