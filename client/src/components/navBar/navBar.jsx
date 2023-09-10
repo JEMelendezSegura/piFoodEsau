@@ -17,6 +17,9 @@ class NavBar extends React.Component{
             <NavLink to={"/"}>
                 <button >Landing</button>
             </NavLink>
+            <NavLink to={"/form"}>
+                <button >Crear receta</button>
+            </NavLink>
         </nav>
     }
 }
