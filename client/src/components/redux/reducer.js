@@ -60,6 +60,16 @@ function rootReducer(state = initialState, action){
                 ...state,
                 recipes: filteredRecipes,
             };
+        case RECIPE_FILTER_BY_DIET:
+            const filteredRecipesByDiet = state.recipes.filter(recipe => {
+                // Verificar si el array "diets" de la receta contiene el valor del payload
+                return recipe.diets.includes(action.payload);
+            });
+            return {
+                ...state,
+                recipes: filteredRecipesByDiet,
+            };
+
         default:
             return state;
     }

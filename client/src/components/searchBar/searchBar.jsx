@@ -39,7 +39,7 @@ function SearchBar ({handleChange, handleSubmit, refreshPage, handleOrder, handl
                 </select>
             </div>
             <div>
-                <select onChange={handleFilterByApi}>
+                <select onChange={handleFilterByDiet}>
                 <option value="">Filtrar recetas por dieta: </option>
                 {diets.map((diet)=>
                 <option value = {diet.name}>{diet.name}</option>
