@@ -1,4 +1,4 @@
-import { GET_RECIPES_BY_NAME, GET_RECIPE_BY_ID, RECIPE_ORDER, RECIPE_ORDER_BY_SCORE} from "./actions";
+import { GET_RECIPES_BY_NAME, GET_RECIPE_BY_ID, RECIPE_ORDER, RECIPE_ORDER_BY_SCORE, RECIPE_FILTER_FROM_API} from "./actions";
 
 const initialState = {
     recipes: [],
@@ -39,6 +39,19 @@ function rootReducer(state = initialState, action){
                 ...state,
                 recipes: sortedRecipesByScore,
             }
+        case RECIPE_FILTER_FROM_API:
+            const { payload } = action;
+            const filteredRecipes = state.recipes.filter(recipe => {
+                if (payload === "DB") {
+                    return recipe.id.length > 30;
+                } else {
+                    return recipe.id.toString().length <= 6;
+                }
+            });
+            return {
+                ...state,
+                recipes: filteredRecipes,
+            };
         default:
             return state;
     }

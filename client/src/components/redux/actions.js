@@ -4,6 +4,7 @@ export const GET_RECIPES_BY_NAME = "GET_RECIPES_BY_NAME";
 export const GET_RECIPE_BY_ID = "GET_RECIPE_BY_ID";
 export const RECIPE_ORDER = "RECIPE_ORDER";
 export const RECIPE_ORDER_BY_SCORE = "RECIPE_ORDER_BY_SCORE";
+export const RECIPE_FILTER_FROM_API = "RECIPE_FILTER_FROM_API";
 
 
 export function getRecipesByName(name){
@@ -29,6 +30,15 @@ export function orderRecipesbyScore(orden){
         payload: orden, 
     }
 }
+
+export function filterRecipesFromApi(source){
+    return {
+        type: RECIPE_FILTER_FROM_API,
+        payload: source,
+    }
+}
+
+
 
 
 export function getRecipeById(id){
