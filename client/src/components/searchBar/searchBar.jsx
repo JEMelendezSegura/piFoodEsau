@@ -13,6 +13,7 @@ function SearchBar ({handleChange, handleSubmit, refreshPage, handleOrder }){
             </form>
             <div>
                 <select onChange={handleOrder}>
+                <option value="">Ordenar por:</option>
                 <option value="A">Ascendente</option>
                 <option value="D">Descendente</option>
                 </select>
