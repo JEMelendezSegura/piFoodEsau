@@ -3,6 +3,7 @@ import axios from "axios";
 export const GET_RECIPES_BY_NAME = "GET_RECIPES_BY_NAME";
 export const GET_RECIPE_BY_ID = "GET_RECIPE_BY_ID";
 
+
 export function getRecipesByName(name){
     return async function(dispatch){
         const response = await axios (`http://localhost:3001/recipes/?name=${name}`);
@@ -12,6 +13,7 @@ export function getRecipesByName(name){
         })
     }
 }
+
 
 export function getRecipeById(id){
     return async function(dispatch){

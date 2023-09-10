@@ -11,6 +11,10 @@ function Home (){
     const dispatch = useDispatch();
     const recipes = useSelector((state)=>state.recipes);
     const [searchRecipe, setSearchRecipe] = useState("");
+    const refreshPage = () => {
+        window.location.reload();
+      };
+    
 
     function handleChange(e){
         e.preventDefault();
@@ -27,9 +31,10 @@ function Home (){
     }, [dispatch]);
 
 
+
     return (
         <div className="home">
-            <SearchBar handleChange={handleChange} handleSubmit={handleSubmit}/>
+            <SearchBar handleChange={handleChange} handleSubmit={handleSubmit} refreshPage={refreshPage}/>
             <Cards recipes ={recipes}/>
         </div>
       );

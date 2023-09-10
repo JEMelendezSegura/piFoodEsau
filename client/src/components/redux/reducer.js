@@ -1,4 +1,4 @@
-import { GET_RECIPES_BY_NAME, GET_RECIPE_BY_ID } from "./actions";
+import { GET_RECIPES_BY_NAME, GET_RECIPE_BY_ID} from "./actions";
 
 const initialState = {
     recipes: [],
