@@ -14,12 +14,11 @@ function Landing() {
   return (
     <div className="homepage">
       <div className="transparent-box">
-        <h1>DIETAS Y RECETAS</h1>
-        <p>by</p>
-        <h2>
+        <h1 className="h1">DIETAS Y RECETAS</h1>
+        <h2 className="h2">
           JOSÉ ESAÚ MELÉNDEZ SEGURA
         </h2>
-        <button onClick={handleClick}>Home</button>
+        <button className="button" onClick={handleClick}>Home</button>
       </div>
     </div>
   );

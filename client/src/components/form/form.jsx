@@ -1,110 +1,8 @@
-// import { useState } from "react";
-// import { useDispatch } from "react-redux";
-
-
-// function Form(){
-//     const dispatch = useDispatch();
-//     const [formData, setFormData] = useState({
-//         title:"",
-//         image: "",
-//         summary: "",
-//         healthScore: 0,
-//         diets: [],
-//         steps: [],
-//     });
-
-//     const [errores, setErrores] = useState({
-//         title:"",
-//         image: "",
-//         summary: "",
-//         healthScore: "",
-//         diets: "",
-//         steps: "",
-//     })
-
-
-//     function handleInputChange(e){
-//         const {name, value} = e.target;
-//         setFormData({
-//             ...formData,
-//             [name]: value,
-//         })
-//     };
-
-//     function validardatos(campo, valor){
-//         switch (campo){
-//             case "title":
-//                 const notNumber = /^[^0-9]+$/;
-//                 if(!notNumber.test(valor)){
-//                     setErrores({
-//                         ...errores,
-//                         title: "El nombre de la receta no debe contener números",
-//                     });
-//                 } else {
-//                     setErrores({
-//                         ...errores,
-//                         title: "",
-//                     });
-//                 }
-//                 case "image":
-//                 const urlPattern = /^(https?:\/\/)?([\da-z.-]+)\.([a-z.]{2,6})([/\w .-]*)*\/?$/;
-//                 if(!urlPattern.test(valor)){
-//                     setErrores({
-//                         ...errores,
-//                         image: "La URL ingresada no es válida",
-//                     });
-//                 } else {
-//                     setErrores({
-//                         ...errores,
-//                         image: "",
-//                     });
-//                 }
-//                 case "healthScore":
-//                 const numero = parseFloat(valor);
-//                 if(isNaN(numero) || numero < 0 || numero >100){
-//                     setErrores({
-//                         ...errores,
-//                         healthScore: "El healthScore debe ser un número entre 0 y 100",
-//                     });
-//                 } else {
-//                     setErrores({
-//                         ...errores,
-//                         healthScore: "",
-//                     });
-//                 }
-//             default:
-//         }
-//     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-//     return (
-//         <div>
-//             <p>estas en el form</p>
-//         </div>
-//     )
-// }
-
-// export default Form;
-//!!!!!!!!!!!!!
-
-
-
-
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import axios from 'axios';
 import { useSelector } from 'react-redux';
+import "../form/form.style.css";
 
 function RecipeForm() {
   const diets = useSelector((state) => state.diets);
@@ -114,7 +12,7 @@ function RecipeForm() {
     image: '',
     summary: '',
     healthScore: '',
-    diets: [], // Ahora es un array de las dietas seleccionadas
+    diets: [], 
     steps: [],
   });
 
@@ -127,24 +25,23 @@ function RecipeForm() {
   });
 
   const validateImageURL = (url) => {
-    // Expresión regular para validar una URL
-    const urlPattern = /^(https?:\/\/)?([\da-z.-]+)\.([a-z.]{2,6})([/\w .-]*)*\/?$/;
+    const urlPattern = /^(https?:\/\/)?([\da-z.-]+)\.([a-z.]{2,6})([/\w .-]*)*\/?$/;  //Valido que sea una URL
     return urlPattern.test(url);
   };
 
   const validateHealthScore = (score) => {
     const numericScore = parseInt(score, 10);
-    return !isNaN(numericScore) && numericScore >= 0 && numericScore <= 100;
+    return !isNaN(numericScore) && numericScore >= 0 && numericScore <= 100;    //Valido que no sea entre 0 y 100
   };
 
-  const handleChange = (e) => {
+  const handleChange = (e) => {           //Accede a determinado elemento del formData
     const { name, value } = e.target;
     setFormData({
       ...formData,
       [name]: value,
     });
 
-    if (name === 'title' && /\d/.test(value)) {
+    if (name === 'title' && /\d/.test(value)) {     //Validando que no tenga números el texto ingresado
       setErrors({
         ...errors,
         title: 'El título no debe contener números.',
@@ -181,7 +78,7 @@ function RecipeForm() {
     }
   };
 
-  const handleImagePaste = (e) => {
+  const handleImagePaste = (e) => {         //para poder pegar la url con el mouse
     e.preventDefault();
     const pastedValue = e.clipboardData.getData('text');
     setFormData({
@@ -202,14 +99,14 @@ function RecipeForm() {
     }
   };
 
-  // Modifica la función handleDietChange para manejar los cambios en las casillas de verificación
+
   const handleDietChange = (e) => {
     const { name, checked } = e.target;
 
-    // Crea una copia del array de dietas seleccionadas
+
     const selectedDietsCopy = [...formData.diets];
 
-    // Si la casilla de verificación está marcada, agrega la dieta al array; de lo contrario, elimínala
+  
     if (checked) {
       selectedDietsCopy.push(name);
     } else {
@@ -245,8 +142,7 @@ function RecipeForm() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Validación adicional para diets y steps
-    if (formData.diets.length === 0) {
+    if (formData.diets.length === 0) {              //validación de dieta para seleccionar al menos una
       setErrors({
         ...errors,
         diets: 'Debe seleccionar al menos una dieta.',
@@ -259,7 +155,7 @@ function RecipeForm() {
       });
     }
 
-    if (formData.steps.some((step) => step.step.trim() === '')) {
+    if (formData.steps.some((step) => step.step.trim() === '')) {     //validación para no enviar un paso sin descripcion
       setErrors({
         ...errors,
         steps: 'Todos los pasos deben tener una descripción.',
@@ -273,10 +169,9 @@ function RecipeForm() {
     }
 
     try {
-      const response = await axios.post('http://localhost:3001/recipes/', formData); // Cambia la URL de la API según tu configuración
-      dispatch({ type: 'ADD_RECIPE', payload: response.data }); // Agrega la receta a tu estado de Redux si es necesario
-      // Limpia el formulario
-      setFormData({
+      const response = await axios.post('http://localhost:3001/recipes/', formData); 
+
+      setFormData({         // para limpiar el formulario despues de capturar
         title: '',
         image: '',
         summary: '',
@@ -290,7 +185,7 @@ function RecipeForm() {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form className='form' onSubmit={handleSubmit}>
       <div>
         <label htmlFor="title">Título:</label>
         <input type="text" id="title" name="title" value={formData.title} onChange={handleChange} required />
