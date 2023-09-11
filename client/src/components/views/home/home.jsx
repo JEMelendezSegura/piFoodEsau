@@ -111,8 +111,6 @@ function Home() {
         handleFilterByDiet={handleFilterByDiet}
         diets={diets}
         />
-      
-
       <Cards />
     </div>
     
