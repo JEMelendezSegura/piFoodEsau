@@ -15,7 +15,6 @@ import { useSelector } from "react-redux";
 
 function Home() {
   const dispatch = useDispatch();
-  const recipes = useSelector((state) => state.recipes);
   const diets = useSelector((state) => state.diets);
   const [searchRecipe, setSearchRecipe] = useState("");
   const refreshPage = () => {
@@ -56,8 +55,51 @@ function Home() {
   function handleFilterByDiet(e){
     dispatch(filterRecipesByDiet(e.target.value));
   }
+  // PAGINADO
+
+//   function nexHandler(){
+//     const totalElementos = recipes.length;
+//     const nextPage = currentPage +1;
+//     const firstIndex = nextPage * 9;
+//     if(firstIndex === totalElementos) return;
+//     setCards([...datosFromApi].splice(firstIndex, 9))
+//     setCurrentPage(nextPage);
+// }
+
+// function prevHandler(){
+//     const prevPage = currentPage -1;
+//     if(prevPage <0) return;
+//     const firstIndex = prevPage * 9;
+//     setCards([...datosFromApi].splice(firstIndex, 9))
+//     setCurrentPage(prevPage);
+
+// }
+
+// const [datosFromApi, setDatosFromApi] = useState(recipes);
+// const [cards, setCards] = useState([...recipes].splice(0,9));
+// const [currentPage, setCurrentPage] = useState(0);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   return (
+    <div>
     <div className="home">
       <SearchBar
         handleChange={handleChange}
@@ -68,9 +110,13 @@ function Home() {
         handleFilterByApi={handleFilterByApi}
         handleFilterByDiet={handleFilterByDiet}
         diets={diets}
-      />
-      <Cards recipes={recipes} />
+        />
+      
+
+      <Cards />
     </div>
+    
+        </div>
   );
 }
 

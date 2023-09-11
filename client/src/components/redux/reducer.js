@@ -4,6 +4,7 @@ const initialState = {
     recipes: [],
     recipeDetail: [],
     diets: [],
+    recipesFromBackend :[]
 }
 
 function rootReducer(state = initialState, action){
@@ -12,6 +13,7 @@ function rootReducer(state = initialState, action){
             return {
                 ...state,
                 recipes: action.payload,
+                recipesFromBackend: action.payload,
             }
         case CLEAR_RECIPE_DETAIL:
             return {
@@ -31,7 +33,7 @@ function rootReducer(state = initialState, action){
                 ...state,
                 recipeDetail:  action.payload,
             }
-        case RECIPE_ORDER:
+        case RECIPE_ORDER:  //!spalguisheee
             const sortedRecipes = [...state.recipes];
             if (action.payload === "A") {
                 sortedRecipes.sort((a, b) => a.title.localeCompare(b.title));
@@ -55,7 +57,7 @@ function rootReducer(state = initialState, action){
             }
         case RECIPE_FILTER_FROM_API:
             const { payload } = action;
-            const filteredRecipes = state.recipes.filter(recipe => {
+            const filteredRecipes = state.recipesFromBackend.filter(recipe => {
                 if (payload === "DB") {
                     return recipe.id.length > 30;
                 } else {
@@ -64,16 +66,16 @@ function rootReducer(state = initialState, action){
             });
             return {
                 ...state,
-                recipes: filteredRecipes,
+                recipes: [...filteredRecipes],
             };
         case RECIPE_FILTER_BY_DIET:
-            const filteredRecipesByDiet = state.recipes.filter(recipe => {
+            const filteredRecipesByDiet = state.recipesFromBackend.filter(recipe => {
                 // Verificar si el array "diets" de la receta contiene el valor del payload
                 return recipe.diets.includes(action.payload);
             });
             return {
                 ...state,
-                recipes: filteredRecipesByDiet,
+                recipes: [...filteredRecipesByDiet],
             };
 
         default:
