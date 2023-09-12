@@ -1,12 +1,15 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+
 import axios from 'axios';
 import { useSelector } from 'react-redux';
 import "../form/form.style.css";
 
 function RecipeForm() {
+
+
+
   const diets = useSelector((state) => state.diets);
-  const dispatch = useDispatch();
+
   const [formData, setFormData] = useState({
     title: '',
     image: '',
@@ -208,7 +211,7 @@ function RecipeForm() {
       <div>
         <label>Dietas:</label>
         {diets.map((diet) => (
-          <div key={diet.name}>
+          <div className='diets' key={diet.name}>
             <input
               type="checkbox"
               id={diet.name}
@@ -222,7 +225,7 @@ function RecipeForm() {
         {errors.diets && <p className="error">{errors.diets}</p>}
       </div>
       <div>
-        <label>Ingredientes:</label>
+        <label>Pasos para hacer la receta:</label>
         <ul>
           {formData.steps.map((step, index) => (
             <li key={index}>

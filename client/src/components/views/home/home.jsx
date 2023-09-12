@@ -55,23 +55,25 @@ function Home() {
     dispatch(filterRecipesByDiet(e.target.value));
   }
  
-  return (
-    <div className="background-image">
+return (
+  <div>
     <div className="home">
-      <SearchBar
-        handleChange={handleChange}
-        handleSubmit={handleSubmit}
-        refreshPage={refreshPage}
-        handleOrder={handleOrder}
-        handleOrderByScore={handleOrderByScore}
-        handleFilterByApi={handleFilterByApi}
-        handleFilterByDiet={handleFilterByDiet}
-        diets={diets}
+      <div>
+        <SearchBar
+          handleChange={handleChange}
+          handleSubmit={handleSubmit}
+          refreshPage={refreshPage}
+          handleOrder={handleOrder}
+          handleOrderByScore={handleOrderByScore}
+          handleFilterByApi={handleFilterByApi}
+          handleFilterByDiet={handleFilterByDiet}
+          diets={diets}
         />
-      <Cards />
+      </div>
+    <Cards />
     </div>
-    </div>
-  );
+  </div>
+);
 }
 
 export default Home;

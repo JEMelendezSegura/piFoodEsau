@@ -10,6 +10,13 @@ body{
     text-align: center;
 }
 
+.home {
+  display: grid;
+  grid-template-columns: auto 1fr; 
+  gap: 20px; 
+  align-items: start; 
+}
+
 .home-title{
     margin-top: 75px;
     margin-bottom: 50px;
@@ -18,9 +25,5 @@ body{
     font-family: "Bigelow Rules";
 }
 
-.home{
-    display:flex;
-    flex-direction:row;
-    align-items:flex-start;
 
-}
+

@@ -34,11 +34,9 @@ function Cards() {
 
         <h2>Recetas</h2>
       </div>
-      <div className="cards">
+      <div className="tarjetas">
         {currentRecipieOnPage.map(
-          (
-            recipe //!cambie los recipes por cards para renderizar las 9 que quiero
-          ) => (
+          (recipe) => (
             <Card recipe={recipe} />
           )
         )}
@@ -49,6 +47,3 @@ function Cards() {
 
 export default Cards;
 
-/* <h1>Página: {currentPage} </h1>
-<button onClick={prevHandler}>Prev</button>
-<button onClick={nextHandler}>Next</button> */

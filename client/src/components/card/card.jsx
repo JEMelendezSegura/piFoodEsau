@@ -9,7 +9,7 @@ return (
     <div className="card">
         <h2>{title}</h2>
         <Link to={`/detail/${id}`}>
-        <img src={image} alt="Foto de la receta"></img>
+        <img className="card-image" src={image} alt="Foto de la receta"></img>
         </Link>
         <p>{diets}</p>
     </div>
