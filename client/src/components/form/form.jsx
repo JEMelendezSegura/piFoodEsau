@@ -49,6 +49,7 @@ function RecipeForm() {
         ...errors,
         title: 'El título no debe contener números.',
       });
+
     } else if (name === 'title') {
       setErrors({
         ...errors,

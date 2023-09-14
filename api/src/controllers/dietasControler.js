@@ -48,7 +48,9 @@ const getAllDiets = async () => {
   if (dbCount === 0) {
     const infoFromApi = (
       await axios.get(
-        `https://run.mocky.io/v3/84b3f19c-7642-4552-b69c-c53742badee5`      //!cambiar por la url de spoon
+        // `https://run.mocky.io/v3/84b3f19c-7642-4552-b69c-c53742badee5`
+              //!cambiar por la url de spoon
+              `https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_KEY}&addRecipeInformation=true&number=100`
       )
     ).data.results;
 

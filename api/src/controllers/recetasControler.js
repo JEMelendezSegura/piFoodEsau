@@ -8,8 +8,8 @@ const getRecipeById = async (id) => {
   if(id.length < 25){
     const infoFromApi = (
     await axios.get(
-      // `https://api.spoonacular.com/recipes/${id}/information?apiKey=${API_KEY}`
-      'https://run.mocky.io/v3/84b3f19c-7642-4552-b69c-c53742badee5'
+      `https://api.spoonacular.com/recipes/${id}/information?apiKey=${API_KEY}`
+      // 'https://run.mocky.io/v3/84b3f19c-7642-4552-b69c-c53742badee5'
     )
   ).data;
   const recipeApi = {
@@ -40,11 +40,11 @@ const getRecipeById = async (id) => {
 const getRecipeByName = async (name) =>{
   if(!name || name === ""){   //! obtengo todoas las dietas de DB y api
     const allRecipesDb = await Recipe.findAll();
-    const allRecipesApi = (await axios.get(`https://run.mocky.io/v3/84b3f19c-7642-4552-b69c-c53742badee5`)).data.results;
+    const allRecipesApi = (await axios.get(`https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_KEY}&addRecipeInformation=true&number=100`)).data.results;
     return [...allRecipesDb,...allRecipesApi];
   } else {
 
-    const infoFromApi = (await axios.get(`https://run.mocky.io/v3/84b3f19c-7642-4552-b69c-c53742badee5`)).data.results;
+    const infoFromApi = (await axios.get(`https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_KEY}&number=100`)).data.results;
     const recipesApi = infoFromApi.filter(recipe => recipe.title.toLowerCase().includes(name.toLowerCase()));
     const recipesDB = await Recipe.findAll({ where: { title: { [Sequelize.Op.iLike]: `%${name}%`} } });
     return [...recipesApi, ...recipesDB];
